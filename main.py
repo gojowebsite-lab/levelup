@@ -18,6 +18,23 @@ import importlib.util
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Any
 
+# ==================== VERCEL COMPATIBILITY LAYER ====================
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return jsonify({
+        "status": "online",
+        "service": "TEAM 84FF - FreeFire Level Up Bot",
+        "mode": "Vercel Serverless Gateway"
+    })
+
+@app.route("/health")
+def health():
+    return jsonify({"health": "ok"})
+
 
 _LVL_MODULE = None
 
@@ -1038,7 +1055,7 @@ async def start_game_battle_royale(region, client_version, writer, key, iv):
             region, client_version, writer, key, iv
         )
     packet = bytes.fromhex(
-        "080112f7090a010110013a110a044944433110d1011a064555524f50453a110a044944433210a1011a064555524f504540014a0801090a0b1219202758016287090a80013038384638324246303241393637363730323031303230303030303030303030303031383030303230303136303030333737383332363333304630303030303034363736323531343131303130343031313737323832363730653734386333663661363865653765303030303030666630303031303130326361636661313664101d1afb02735d5e571400024a775d45414d1a041b1c001f11010449715f4243481a001e1d071c1703004b1a4066785c524570735c51486775421b5c5a4c07504042685a63610816054e19025e75196001477c015165406370195f5547404e4550640103020f13040648514a0e02007c410856007f0654011a4a420472410504617b7d57630b1108495a4c6a0b78470b740065645e525a057258425f584a447d4e6759440c11044e7c596d7f4b625f7d04055a47505c4e1d6b5b4107447d7201057d7f0f14084e430457674f7e517d72015172415d027473577c4d615f79535256780911030f4d5e027a797f614165067806505d53777750475e75064257076500460817014e741e7e5078487e7a7c465e7669767153497064605a7376677773550d160148037e18675966787f4c42607a645f577e7b441b460776026b18685d0b110205490060020f70676175654674706671797f41067346677c4e06585e780f15074c57047b40517075415f6364027259674b5b0166407f7340600407770a22047a5d5c52300b3a0816746757076316134208312e3133302e3231480350015ae10403626253513632347634793538416456324b796f566c6143314b2b4f6a51517248742f314b32626d44644e786f6366432b63304e4f7a376e57466e4b70396d3949616849474a58487a69685437755573656868625545362b6d3849474d524d63777879506672757a38312f5979747269514e387737324a376c714b6e56306b6d3463674e70796f4b63434a7a4f4163677a716a635739374477306d56417a7355782f6859624175336c78626131384f6669572b52323546314466307a4539324a6c6a784c746841493444347155564b7a4c67317a2f32414a37574c6e36524248423677454d423944707972627968684e394e796e397a686f7a41714347667766685447364b6270544a315a354243376369396f4363476a53716d44446a3236437465514a4a4c48434155726778584f466e3778665967634270305345544b2b586f415756527a4f4153515075724856576f3837574c3455334a5a413839346d596b78384365366148516b5a77614d537053796137456f474f6950686152314b50774845505573796264393641534f505a344565426d463544DU7pGLKgGn8+FFk0cAPJLvpbUwKRzDQHxOdRTIUIttX0RNNjQ3ul2IaKfZW4Uv3ex1iIh4m4xhBTQi7v/aBhI18HYosR9tsDj//4MEd+lkzu63s5BXF7SViQw/QmS9MOWK56sKGedYViUJF9KTJkCNQVQUxD5P6FHQUwjTSXr24xk1FbAtH8WqIgg7jeUSkDPmaI6k/MO6e"
+        "080112f7090a010110013a110a044944433110d1011a064555524f50453a110a044944433210a1011a064555524f504540014a0801090a0b1219202758016287090a80013038384638324246303241393637363730323031303230303030303030303030303031383030303230303136303030333737383332363333304630303030303034363736323531343131303130343031313737323832363730653734386333663661363865653765303030303030666630303031303130326361636661313664101d1afb02735d5e571400024a775d45414d1a041b1c001f11010449715f4243481a001e1d071c1703004b1a4066785c524570735c51486775421b5c5a4c07504042685a63610816054e19025e75196001477c015165406370195f5547404e4550640103020f13040648514a0e02007c410856007f0654011a4a420472410504617b7d57630b1108495a4c6a0b78470b740065645e525a057258425f584a447d4e6759440c11044e7c596d7f4b625f7d04055a47505c4e1d6b5b4107447d7201057d7f0f14084e430457674f7e517d72015172415d027473577c4d615f79535256780911030f4d5e027a797f614165067806505d53777750475e75064257076500460817014e741e7e5078487e7a7c465e7669767153497064605a7376677773550d160148037e18675966787f4c42607a645f577e7b441b460776026b18685d0b110205490060020f70676175654674706671797f41067346677c4e06585e780f15074c57047b40517075415f6364027259674b5b0166407f7340600407770a22047a5d5c52300b3a0816746757076316134208312e3133302e3231480350015ae10403626253513632347634793538416456324b796f566c6143314b2b4f6a51517248742f314b32626d44644e786f6366432b63304e4f7a376e57466e4b70396d3949616849474a58487a69685437755573656868625545362b6d3849474d524d63777879506672757a38312f5979747269514e387737324a376c714b6e56306b6d3463674e70796f4b63434a7a4f4163677a716a635739374477306d56417a7355782f6859624175336c78626131384f6669572b52323546314466307a4539324a6c6a784c746841493444347155564b7a4c67317a2f32414a37574c6e36524248423677454d423944707972627968684e394e796e397a686f7a41714347667766685447364b6270544a315a354243376369396f4363476a53716d44446a3236437465514a4a4c48434155726778584f466e3778665967634270305345544b2b586f415756527a4f4153515075724856576f3837574c4453342f70477169666c39384365366148516b5a77614d537053796137456f474f6950686152314b50774845505573796264393641534f505a344565426d463544DU7pGLKgGn8+FFk0cAPJLvpbUwKRzDQHxOdRTIUIttX0RNNjQ3ul2IaKfZW4Uv3ex1iIh4m4xhBTQi7v/aBhI18HYosR9tsDj//4MEd+lkzu63s5BXF7SViQw/QmS9MOWK56sKGedYViUJF9KTJkCNQVQUxD5P6FHQUwjTSXr24xk1FbAtH8WqIgg7jeUSkDPmaI6k/MO6e"
     )
     proto = CguTeam_pb2.StartMatch()
     proto.ParseFromString(packet)
@@ -1781,33 +1798,7 @@ async def functional_lone_wolf(addrs, starter_packet, account_region, client_ver
                         last_start_time = 0.0
                         return False
 
-                _manual_human_start = bool(
-                    load_cfg().get("squad", {}).get("manual_human", False)
-                    or SQUAD.test_mode
-                )
-                if _manual_human_start:
-                    try:
-                        await squad_stage(
-                            reader, writer, str(account_id or uid_str),
-                            account_region, current_key, current_iv,
-                            client_version, timeout=SQ_TIMEOUT
-                        )
-                        if not SQUAD.code:
-                            raise ConnectionError(
-                                "server did not return a public 7-digit team code"
-                            )
-                        print_info(
-                            "[SQUAD] Team ready. Human game client se Start "
-                            "dabega; bot MATCH FOUND ka wait kar raha hai."
-                        )
-                    except asyncio.CancelledError:
-                        raise
-                    except Exception as _mte:
-                        print_error(f"[SQUAD] manual human-team setup failed: {_mte}")
-
-                if _manual_human_start:
-                    last_start_time = float("inf")
-                elif not await send_start_match():
+                if not await send_start_match():
                     raise ConnectionError("Initial StartMatch failed")
 
                 while True:
@@ -1825,8 +1816,7 @@ async def functional_lone_wolf(addrs, starter_packet, account_region, client_ver
 
                     now = asyncio.get_running_loop().time()
                     queue_wait = match_wait_seconds()
-                    if (not _manual_human_start and
-                            now - last_start_time >= queue_wait):
+                    if now - last_start_time >= queue_wait:
                         print_info(
                             f"[LW MODE] UID {uid_str}: no MATCH FOUND after "
                             f"{queue_wait:.0f}s; retrying matchmaking on the live gateway"
@@ -1837,14 +1827,6 @@ async def functional_lone_wolf(addrs, starter_packet, account_region, client_ver
                         data = await asyncio.wait_for(reader.read(8192), timeout=0.5)
                     except asyncio.TimeoutError:
                         no_response_count += 1
-                        if _manual_human_start:
-                            if no_response_count % 60 == 0:
-                                try:
-                                    writer.write(await send_keep_alive(account_region))
-                                    await writer.drain()
-                                except Exception:
-                                    pass
-                            continue
                         if no_response_count % 60 == 0:
                             try:
                                 keepalive = await send_keep_alive(account_region)
@@ -2008,13 +1990,6 @@ async def functional_lone_wolf(addrs, starter_packet, account_region, client_ver
                                            f"waiting {NEW_MATCH_DELAY:.0f}s before next queue")
                                 await human_like_delay(NEW_MATCH_DELAY - 0.5)
                                 reconnects = 0
-                                if _manual_human_start:
-                                    last_start_time = float("inf")
-                                    print_info(
-                                        "[SQUAD] Match finished. Human game client "
-                                        "se next Start dabega; waiting for MATCH FOUND."
-                                    )
-                                    continue
                                 if writer.is_closing():
                                     raise ConnectionError(
                                         "Gateway closed after match; reconnecting"
@@ -2152,27 +2127,8 @@ async def functional_lone_wolf(addrs, starter_packet, account_region, client_ver
 async def functional_battle_royale(addrs, starter_packet, account_region, client_version,
                                  key, iv, account_id="", account_data=None,
                                  max_reconnects=10):
-    # FIXED: Check if squad disabled completely OR if expected count is invalid
-    if not SQUAD.enabled and int(SQUAD.expected or 1) <= 1:
-        _lvl = _load_lvl_module()
-        if _lvl is not None:
-            uid_label = str(account_id)
-            try:
-                bot_state.update_status(uid_label, "PLAYING")
-                print_info(f"[BR] worker active for UID {uid_label}")
-            except Exception:
-                pass
-            try:
-                return await _lvl.functional_br(
-                    addrs, starter_packet, account_region, client_version,
-                    key, iv, account_id=account_id, account_data=account_data,
-                    max_reconnects=max_reconnects
-                )
-            finally:
-                try:
-                    bot_state.update_status(uid_label, "ONLINE")
-                except Exception:
-                    pass
+    # FORCE SQUAD TO BE DISABLED
+    SQUAD.enabled = False
 
     reconnects = 0
     ip, port = addrs.split(":")
@@ -2248,77 +2204,6 @@ async def functional_battle_royale(addrs, starter_packet, account_region, client
                 last_start_time = 0.0
                 queue_pk_count = 0      
 
-                if int(SQUAD.expected or 0) > 1:
-                    try:
-                        await friend_gate(current_account_data or account_data, uid_str)
-                    except Exception as _fge:
-                        print_error(f"[FRIEND] gate error: {type(_fge).__name__}: {_fge}")
-
-                try:
-                    await squad_stage(reader, writer,
-                                      str(account_id or
-                                          (account_data or {}).get('auth_uid') or uid_str),
-                                      account_region, current_key, current_iv,
-                                      client_version, timeout=SQ_TIMEOUT)
-                except Exception as _sq_e:
-                    print_error(f"[SQUAD] stage error: {type(_sq_e).__name__}: {_sq_e}")
-
-                if str(account_id) == str(SQUAD.leader_uid):
-                    if SQUAD.code:
-                        print_success(f"[SQUAD] TEAM CODE: {SQUAD.code}")
-                    else:
-                        print_warning("[SQUAD] no public team code received from server")
-
-                if int(SQUAD.expected or 0) > 1 or SQUAD.enabled:
-                    if SQUAD.test_mode:
-                        if str(account_id) == str(SQUAD.leader_uid):
-                            print_success(
-                                f"[SQUAD] TEST MODE: join TEAM CODE {SQUAD.code} "
-                                "in the game, then type 'joined' here"
-                            )
-                            await wait_for_manual_human_team()
-                            SQUAD.start_gate.set()
-                            ok = True
-                        else:
-                            await SQUAD.start_gate.wait()
-                            ok = True
-                    else:
-                        try:
-                            ok = await team_verdict(wait=TEAM_VERDICT_WAIT)
-                        except Exception as _tv_e:
-                            print_error(f"[SQUAD] team check error: "
-                                         f"{type(_tv_e).__name__}: {_tv_e}")
-                            ok = False
-
-                    if ok and boss_invite_enabled():
-                        try:
-                            if str(account_id) == str(SQUAD.leader_uid):
-                                boss_ok = await invite_boss_and_wait(
-                                    reader, writer, str(account_id),
-                                    account_region, current_key, current_iv)
-                            else:
-                                boss_ok = await wait_for_boss_result()
-                        except Exception as _be:
-                            print_error(f"[SQUAD] boss invite error: "
-                                        f"{type(_be).__name__}: {_be}")
-                            boss_ok = False
-                        if not boss_ok:
-                            PLAY_STOP["on"] = True
-                            print_error("[SQUAD] boss did not join; no match will start")
-                            return
-                        print_success("[SQUAD] boss joined the verified team -> ready to start")
-
-                    if not ok and not SQUAD.test_mode:
-                        print_warning("[TEAM] Team verification pending/unverified - proceeding with individual queue")
-
-                    if SQUAD.verified and not SQUAD.test_mode:
-                        print_success("[SQUAD] team verified -> matchmaking as ONE group")
-                        if str(account_id) == str(SQUAD.leader_uid):
-                            await wait_for_manual_human_team()
-                            SQUAD.start_gate.set()
-                        else:
-                            await SQUAD.start_gate.wait()
-
                 async def send_start_match():
                     nonlocal search_attempts, last_start_time
                     search_attempts += 1
@@ -2359,7 +2244,6 @@ async def functional_battle_royale(addrs, starter_packet, account_region, client
                         pass
 
                     now = asyncio.get_running_loop().time()
-                    pass
 
                     try:
                         data = await asyncio.wait_for(reader.read(8192), timeout=0.5)
@@ -3021,154 +2905,15 @@ async def process_account_token(access_token: str) -> Optional[Dict]:
         return None
 
 
-async def friend_stage(account_data, label, roster_wait=120.0):
-    try:
-        from friend import friend_enabled, request_all, check_friends
-    except Exception as e:
-        print_warning(f"[FRIEND] {label}: module unavailable: {type(e).__name__}: {e}")
-        return
-    if not friend_enabled():
-        print_info(f"[FRIEND] {label}: disabled in config.json -> skipped")
-        return
-
-    aid = str((account_data or {}).get("account_id") or "")
-    want = int(SQUAD.expected or (len(SQUAD.member_uids) + 1))
-    t0 = time.time()
-    while len(SQUAD.member_uids) < want and time.time() - t0 < roster_wait:
-        await asyncio.sleep(2.0)
-
-    others = [m for m in SQUAD.member_uids if m != aid]
-    if not others:
-        print_info(f"[FRIEND] {label}: no other account in this round -> nothing to send")
-        return
-
-    print_info(f"[FRIEND] {label}: sending a friend request to each of the "
-               f"{len(others)} other account(s) first: {', '.join(others)}")
-    await request_all(others, account_data, label=label)
-    await asyncio.sleep(3.0)
-
-    present, missing, friends, err = await check_friends(
-        account_data, others, label=label, tries=3, delay=6.0)
-
-    if missing:
-        print_warning(f"[FRIEND] {label}: {len(missing)} not in the list yet -> "
-                      f"requesting them again")
-        await request_all(missing, account_data, label=label)
-        present, missing, friends, err = await check_friends(
-            account_data, others, label=label, tries=2, delay=8.0)
-
-    if not missing:
-        print_success(f"[FRIEND] {label}: ALL {len(present)}/{len(others)} "
-                      f"confirmed in the friend list")
-    else:
-        print_warning(f"[FRIEND] {label}: NOT confirmed - missing "
-                      f"{', '.join(missing)}" + (f"   ({err})" if err else ""))
-
-
-_FGATE = {"event": None, "done": 0, "want": 0}
-
-
-def reset_friend_gate():
-    _FGATE["event"] = None
-    _FGATE["done"] = 0
-    _FGATE["want"] = 0
-
-
-async def friend_gate(account_data, label, roster_wait=120.0, check_wait=90.0):
-    if _FGATE["event"] is None:
-        _FGATE["event"] = asyncio.Event()
-
-    try:
-        from friend import friend_enabled, request_all, check_friends
-    except Exception as e:
-        print_warning(f"[FRIEND] {label}: gate unavailable: {type(e).__name__}: {e}")
-        return False
-    if not friend_enabled():
-        print_info(f"[FRIEND] {label}: disabled in config.json -> check skipped")
-        return True
-
-    aid = str((account_data or {}).get("account_id") or "")
-    want = int(SQUAD.expected or (len(SQUAD.member_uids) + 1))
-    _FGATE["want"] = want
-
-    t0 = time.time()
-    while len(SQUAD.member_uids) < want and time.time() - t0 < roster_wait:
-        await asyncio.sleep(2.0)
-
-    others = [m for m in SQUAD.member_uids if m != aid]
-    if not others:
-        print_info(f"[FRIEND] {label}: solo round -> nothing to check")
-    else:
-        print_info(f"[FRIEND] {label}: CHECKING the friend list BEFORE the "
-                   f"team ({len(others)} other account(s))")
-        _, missing, _, err = await check_friends(account_data, others,
-                                                 label=label, tries=2, delay=5.0)
-        if missing:
-            print_warning(f"[FRIEND] {label}: {len(missing)} not friends yet "
-                          f"-> sending the request again: {', '.join(missing)}")
-            await request_all(missing, account_data, label=label)
-            _, missing, _, err = await check_friends(account_data, others,
-                                                     label=label, tries=2, delay=6.0)
-        if missing:
-            SQUAD.friend_blocked = True
-            print_warning(f"[FRIEND] {label}: STILL NOT in the friend list: "
-                          f"{', '.join(missing)}" + (f"   ({err})" if err else ""))
-        else:
-            print_success(f"[FRIEND] {label}: all {len(others)}/{len(others)} "
-                          f"in the friend list -> the team may be created")
-
-    _FGATE["done"] += 1
-    if _FGATE["done"] >= max(1, want):
-        _FGATE["event"].set()
-    try:
-        await asyncio.wait_for(_FGATE["event"].wait(), timeout=check_wait)
-    except (asyncio.TimeoutError, TimeoutError):
-        print_warning(f"[FRIEND] {label}: only {_FGATE['done']}/{want} accounts "
-                      f"finished the friend check -> using what we have")
-
-    if SQUAD.friend_blocked:
-        print_warning(f"[FRIEND] {label}: FRIENDSHIP NOT CONFIRMED for the "
-                      f"round -> no team will be created")
-        return False
-    if others:
-        print_success(f"[FRIEND] {label}: friend check passed for the whole round")
-    return True
-
-
 async def run_account_worker(account_data: Dict, label: str):
     acc_id = str(account_data['account_id'])
     selected_mode = str(load_cfg().get("mode", "")).lower().strip()
-    independent_mode = selected_mode in (
-        "lone_wolf", "lone wolf", "solo", "solo_lone_wolf",
-        "solo_battle_royale"
-    )
-    if selected_mode in ("battle_royale", "battle royale", "br"):
-        independent_mode = int(SQUAD.expected or 1) <= 1
     solo_lone_wolf = selected_mode in (
         "lone_wolf", "lone wolf", "solo", "solo_lone_wolf"
     )
     is_br_mode = selected_mode in ("battle_royale", "battle royale", "br", "solo_battle_royale")
     informational_task = None
     exp_task = None
-
-    if not independent_mode:
-        try:
-            squad_register(acc_id)
-        except Exception as _sre:
-            print_warning(f"[SQUAD] could not register {acc_id}: {type(_sre).__name__}: {_sre}")
-
-    if not independent_mode:
-        try:
-            await friend_stage(account_data, label)
-        except Exception as _fe:
-            print_warning(f"[FRIEND] {label}: friend stage failed: {type(_fe).__name__}: {_fe}")
-
-    if not independent_mode:
-        try:
-            from friend import send_to_boss
-            await send_to_boss(account_data, label)
-        except Exception as _fe:
-            print_warning(f"[FRIEND] {label}: {type(_fe).__name__}: {_fe}")
 
     try:
         reg = 'IND' if is_br_mode else account_data.get('region', 'ID')
@@ -3472,46 +3217,20 @@ def level_of(account_id):
 
 async def start_round(accounts, guild_id="", require_guild=False):
     uids = [str(a.get("uid")) for a in accounts if a.get("uid")]
-    _test_mode = False
     SQUAD.test_mode = False
-    SQUAD.enabled = bool(load_cfg().get("squad", {}).get("enabled", True))
-
-    _cfg = load_cfg()
-    _manual_human_team = bool(_cfg.get("squad", {}).get("manual_human", False))
-    _mode = str(_cfg.get("mode", "")).lower().replace("_", " ").strip()
-    _is_br = _mode in ("battle royale", "br", "solo battle royale")
-
-    SQUAD.expected = len(accounts) if SQUAD.enabled else 1
+    SQUAD.enabled = False  # DISABLED GROUP / SQUAD FEATURES
+    SQUAD.expected = 1
     SQUAD.member_uids = []
     SQUAD.targets = []
     SQUAD.leader_uid = None
-    SQUAD.leader_connected = asyncio.Event()
-    SQUAD.all_members_connected = asyncio.Event()
-    SQUAD.invites_sent = asyncio.Event()
-    SQUAD.members_connected = set()
     SQUAD.joined = set()
     SQUAD.failed = {}
     SQUAD.code = None
     SQUAD.formed = False
-    SQUAD.attempted = set()
-    SQUAD.evidence = set()
-    SQUAD.seen_by = {}
-    SQUAD.stage_gate = asyncio.Event()
-    SQUAD.stage_expect = 0
-    SQUAD.done_count = 0
-    SQUAD.decision = None
-    SQUAD.verified = False
-    SQUAD.friend_blocked = False     
-    SQUAD.boss_uid = None
-    SQUAD.boss_invited = False
-    SQUAD.boss_verified = False
-    SQUAD.boss_gate = asyncio.Event()
-    SQUAD.start_gate = asyncio.Event()
-    reset_team_command()          
-    reset_friend_gate()           
-    print_info("[GLORY] starting a play round for " + str(len(accounts)) + " accounts")
 
+    print_info("[GLORY] starting a play round for " + str(len(accounts)) + " accounts")
     print_info(f"[LOGIN] authenticating all {len(accounts)} account(s) before BR")
+
     async def _preload_account(idx, acc):
         if acc.get("uid") and acc.get("password"):
             u = str(acc["uid"]).strip()
@@ -3560,19 +3279,7 @@ async def start_round(accounts, guild_id="", require_guild=False):
         print_error("[LOGIN] every account failed its first login")
         return False
 
-    SQUAD.expected = len(accounts) if SQUAD.enabled else 1
-    print_info(f"[SQUAD] live roster: {len(accounts)} account(s); target "
-               f"{SQUAD.expected}/{SQUAD.expected}")
-
-    print_success("[LOGIN] per-account login and guild stage complete; starting workers")
-
-    FRIEND_LIVE_IDS.clear()
-    for acc in accounts:
-        _cred = _cred_for(str(acc.get("uid") or ""))
-        if _cred and _cred.get("account_id"):
-            FRIEND_LIVE_IDS.add(str(_cred["account_id"]))
-    if FRIEND_LIVE_IDS:
-        print_info(f"[FRIEND] live round set: {len(FRIEND_LIVE_IDS)} account(s)")
+    print_success("[LOGIN] per-account login stage complete; starting workers")
 
     for idx, acc in enumerate(accounts):
         token = str(acc.get("token") or "").strip()
@@ -3704,8 +3411,6 @@ async def glory_supervisor(accounts, guild_id=""):
     guild_done = False
     guild_sent = set()
     print_info(f"[GLORY] play loop: every account must reach level {goal}")
-    print_info("[GLORY] the saved guild id is used when all accounts reach the goal,")
-    print_info("[GLORY] then all accounts join the guild and the play loop restarts")
 
     while True:
         if not guild_done:
@@ -3740,105 +3445,6 @@ async def glory_supervisor(accounts, guild_id=""):
                 print_warning("[GLORY] every worker finished - restarting the play loop")
                 await start_round(accounts)
 
-
-# ==================== LIVE FRIEND-REQUEST TRIGGER ====================
-_FRIEND_TRIGGER_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    "friend_request_trigger.json")
-_FRIEND_RESULT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "friend_request_result.json")
-_FRIEND_GAP = 1.5        
-
-
-def _live_credentials() -> Dict[str, Dict]:
-    out, seen = {}, set()
-    for _key, cred in list(bot_state.account_credentials.items()):
-        if not isinstance(cred, dict):
-            continue
-        aid = str(cred.get("account_id") or "")
-        if not aid or aid in seen or not cred.get("token"):
-            continue
-        if FRIEND_LIVE_IDS and aid not in FRIEND_LIVE_IDS:
-            continue
-        seen.add(aid)
-        out[aid] = cred
-    return out
-
-
-async def run_live_friend_request(target_uid) -> Dict:
-    from friend import send_friend_request
-    target_uid = str(target_uid).strip()
-    creds = _live_credentials()
-    if not creds:
-        return {"target": target_uid, "ok": 0, "failed": 0, "results": {},
-                "error": "no live account session in this process"}
-
-    results, ok_n, fail_n = {}, 0, 0
-    items = sorted(creds.items())
-    for i, (aid, cred) in enumerate(items):
-        try:
-            ok, detail = await send_friend_request(
-                target_uid,
-                cred.get("token"),
-                cred.get("server_url"),
-                cred.get("release_version"),
-                label=aid,
-            )
-        except Exception as e:
-            ok, detail = False, f"{type(e).__name__}: {e}"
-        results[aid] = {"ok": bool(ok), "detail": str(detail)}
-        if ok:
-            ok_n += 1
-        else:
-            fail_n += 1
-        print_info(f"[FRIEND-TRIGGER] {aid} -> {target_uid}: "
-                   f"{'OK' if ok else 'FAILED'} - {detail}")
-        if i + 1 < len(items):
-            await asyncio.sleep(_FRIEND_GAP)
-    return {"target": target_uid, "ok": ok_n, "failed": fail_n,
-            "results": results}
-
-
-async def friend_trigger_loop():
-    while True:
-        try:
-            await asyncio.sleep(3.0)
-            if not os.path.exists(_FRIEND_TRIGGER_FILE):
-                continue
-            try:
-                with open(_FRIEND_TRIGGER_FILE, "r", encoding="utf-8") as f:
-                    req = json.load(f)
-            except Exception as e:
-                req = {"target": "", "error": f"unreadable trigger: {e}"}
-            try:
-                os.remove(_FRIEND_TRIGGER_FILE)
-            except OSError:
-                pass
-
-            req = req if isinstance(req, dict) else {}
-            target = str(req.get("target") or "").strip()
-            if not target.isdigit():
-                out = {"target": target, "ok": 0, "failed": 0, "results": {},
-                       "error": str(req.get("error") or "target uid missing")}
-                print_warning(f"[FRIEND-TRIGGER] refused: {out['error']}")
-            else:
-                print_info(f"[FRIEND-TRIGGER] live friend request -> {target} "
-                           f"from {len(_live_credentials())} account(s)")
-                out = await run_live_friend_request(target)
-                out["target"] = target
-                print_success(f"[FRIEND-TRIGGER] done -> {out.get('ok')} sent, "
-                              f"{out.get('failed')} failed (workers untouched)")
-
-            out["finished_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
-            with open(_FRIEND_RESULT_FILE, "w", encoding="utf-8") as f:
-                json.dump(out, f, indent=1)
-        except asyncio.CancelledError:
-            raise
-        except Exception as e:
-            print_warning(f"[FRIEND-TRIGGER] watcher error: "
-                          f"{type(e).__name__}: {e}")
-
-
-# ==================== AZIM-MATCH: MANUAL ACCOUNTS LOADER ====================
 
 async def load_uid_password_accounts():
     path = DARK_MASTER_JSON
@@ -3924,166 +3530,11 @@ async def load_uid_password_accounts():
             selected.append({"uid": uid, "token": str(acc["token"])})
     return selected
 
-async def prompt_for_tokens():
-    loop = asyncio.get_event_loop()
-
-    def _ask():
-        out = []
-        try:
-            print()
-            print("[LOGIN] Paste your access token(s) - one per line.")
-            print("[LOGIN] Press Enter on an EMPTY line when you are done.")
-            print("[LOGIN] (Ctrl+C or Ctrl+D also finishes)\n")
-            while True:
-                line = input("  token> ").strip()
-                if not line:
-                    break
-                if line.startswith("#"):
-                    continue
-                out.append(line)
-                print(f"[LOGIN] token {len(out)} accepted: {line[:14]}...")
-        except (EOFError, KeyboardInterrupt):
-            print()
-        return out
-
-    return await loop.run_in_executor(None, _ask)
-
-
-def read_tokens_file():
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tokens.txt")
-    if not os.path.exists(path):
-        return []
-    out = []
-    try:
-        for line in io.open(path, encoding="utf-8"):
-            line = line.strip()
-            if not line or line.startswith("#"):
-                continue
-            out.append(line)
-    except Exception as e:
-        print_error(f"[LOGIN] tokens.txt unreadable: {e}")
-    return out
-
-
-async def load_token_accounts():
-    tokens = []
-    env = str(os.environ.get("AZIM_TOKENS", "")).strip()
-    if env:
-        tokens = [t for t in env.replace(",", " ").split() if t]
-        print_info(f"[LOGIN] {len(tokens)} token(s) taken from AZIM_TOKENS")
-    else:
-        tokens = await prompt_for_tokens()
-        if not tokens:
-            tokens = read_tokens_file()
-            if tokens:
-                print_info(f"[LOGIN] {len(tokens)} token(s) read from tokens.txt")
-
-    accounts, seen = [], set()
-    for t in tokens:
-        t = str(t).strip()
-        if not t or t.lower() in seen:
-            continue
-        seen.add(t.lower())
-        accounts.append({"token": t})
-    return accounts
-
-
-# ============ TEAM COMMAND =====================
-_TEAM_CMD = {"lock": None, "answer": None}
-PLAY_STOP = {"on": False}
-
-
-def _team_lock():
-    if _TEAM_CMD["lock"] is None:
-        _TEAM_CMD["lock"] = asyncio.Lock()
-    return _TEAM_CMD["lock"]
-
-
-async def _read_line(prompt: str) -> str:
-    def _do():
-        try:
-            return input(prompt)
-        except EOFError:
-            return "q"
-        except KeyboardInterrupt:
-            return "q"
-    return await asyncio.get_running_loop().run_in_executor(None, _do)
-
-
-def reset_team_command():
-    _TEAM_CMD["answer"] = None
-    PLAY_STOP["on"] = False
-
-
-async def pause_until_break():
-    print_warning("[TEAM] BREAK - no matchmaking.  Press Enter here to continue "
-                  "(or type q + Enter to stop).")
-    ans = await _read_line("[TEAM] paused> ")
-    if (ans or "").strip().lower() in ("q", "quit", "stop", "x"):
-        PLAY_STOP["on"] = True
-        print_warning("[TEAM] -> stop requested")
-
-
-async def wait_for_manual_human_team():
-    print_warning(
-        "[SQUAD] TEAM is verified and ready. Type 'joined' after joining "
-        "the code to begin BR, or 'q' to stop."
-    )
-    while True:
-        answer = (await _read_line("[SQUAD] manual team> ")).strip().lower()
-        if answer in ("joined", "join", "start", "s", "go", "1"):
-            print_success("[SQUAD] human joined -> Lone Wolf matchmaking start")
-            return
-        if answer in ("q", "quit", "stop", "x"):
-            PLAY_STOP["on"] = True
-            raise asyncio.CancelledError("manual team stop requested")
-        print_warning("[SQUAD] Type 'joined' to begin BR; 'q' stops the round.")
-
-
-async def ask_team_command(reason=""):
-    if _TEAM_CMD["answer"]:
-        return _TEAM_CMD["answer"]
-    async with _team_lock():
-        if _TEAM_CMD["answer"]:
-            return _TEAM_CMD["answer"]
-        print()
-        print_colored("=" * 60, Colors.WARNING)
-        print_warning(f"[TEAM] THE ACCOUNTS ARE NOT IN ONE TEAM ({reason})")
-        print_colored("  type a command here in Termux:", Colors.WHITE)
-        print_colored("        s = start match SEPARATELY (no group)", Colors.GREEN)
-        print_colored("        b = BREAK / pause until you press Enter", Colors.WARNING)
-        print_colored("        q = STOP everything", Colors.FAIL)
-        print_colored("=" * 60, Colors.WARNING)
-        while True:
-            a = (await _read_line("[TEAM] command> ")).strip().lower()
-            if a in ("", "s", "separate", "start", "1"):
-                _TEAM_CMD["answer"] = "separate"
-                print_warning("[TEAM] -> starting the match SEPARATELY")
-                break
-            if a in ("b", "break", "pause", "2"):
-                _TEAM_CMD["answer"] = "pause"
-                break
-            if a in ("q", "quit", "stop", "x", "3"):
-                _TEAM_CMD["answer"] = "stop"
-                print_warning("[TEAM] -> stopping everything")
-                break
-            print_warning("[TEAM] please type  s ,  b  or  q")
-        return _TEAM_CMD["answer"]
-
 
 async def play_supervisor(accounts):
     print_info(f"[PLAY] play loop for {len(accounts)} account(s): "
                f"login -> start match -> play -> restart when it ends")
-    print_info("[PLAY] no level check, no guild prompt")
     while True:
-        if PLAY_STOP.get("on"):
-            print_warning("[PLAY] STOP command received - no new round is started")
-            try:
-                await stop_round()
-            except Exception:
-                pass
-            print_success("[PLAY] stopped.  Run 'bash run.sh' for a new round.")
-            return
         await asyncio.sleep(15)
         workers = list(bot_state.account_workers.values())
         live = [t for t in workers if not t.done()]
@@ -4133,9 +3584,6 @@ async def main():
     else:
         print_info("Web dashboard off (config.json -> dashboard)")
 
-    asyncio.create_task(friend_trigger_loop())
-    print_info("Live friend-request trigger ready (friend_request_trigger.json)")
-
     async def on_account_added_handler(data):
         token = str(data.get("token") or "").strip()
         if token:
@@ -4159,10 +3607,6 @@ async def main():
 
     print_success(f"[LOGIN] {len(accounts)} UID/password account(s) selected")
     guild_id = await ask_guild_id()
-    if guild_id and guild_id.lower() not in ("skip", "s", "no", "0"):
-        print_success(f"[GLORY] guild {guild_id} selected; joining before team check")
-    else:
-        print_warning("[GLORY] no guild ID supplied; team check will still run")
 
     started = await start_round(accounts, guild_id, require_guild=True)
     if not started:
