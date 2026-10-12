@@ -1,0 +1,103 @@
+{
+  "purpose": "Complete authorized mode-reference template. Do not put account passwords, JWTs, tokens, AES keys, or IVs here.",
+  "important": "Filling this file does not by itself create a working CS mode. Values must come from an authorized client capture and then be validated in code.",
+  "br_current": {
+    "config_mode": "battle_royale",
+    "worker": "Main.py -> account_loop_guest/account_loop_token",
+    "start_function": "start_game_battle_royale",
+    "reference_builder": "reference/lvl.py",
+    "protobuf": "thunderFF_pb2.StartMatch",
+    "payload_transform": "serialize -> session AES encrypt -> length prefix",
+    "region_prefix": {
+      "IND": "031400",
+      "BD": "031400",
+      "ME": "031900",
+      "default": "031500"
+    },
+    "config_start_match_opcodes": ["0315"],
+    "mode_id": 1,
+    "map_id": 1,
+    "match_wait_seconds": 120,
+    "match_found_required": true,
+    "play_loop": "BR movement/XP loop"
+  },
+  "cs_ranked_observed_capture": {
+    "capture_file": "PCAPdroid_10_Oct_15_10_01.pcap",
+    "upstream": "202.181.79.214:39801",
+    "transport": "TCP",
+    "client_to_server_candidate": {
+      "frame_length_bytes": 850,
+      "observed_prefixes": ["6d14", "7114"],
+      "following_frames": ["1214", "1214"],
+      "note": "Prefix differs between sessions; payload is session-specific and must not be treated as a static packet."
+    },
+    "server_confirmation": {
+      "game_mode": 15,
+      "match_type": 6,
+      "cs_special_mode_event_id": 41,
+      "room_id_seen": true,
+      "group_listing_seen": true,
+      "matchmaking_upstream_response": true
+    },
+    "status": "CS_RANKED_MATCHMAKING_CONFIRMED_BUT_BUILDER_NOT_IMPLEMENTED"
+  },
+  "cs_ranked_to_fill_from_authorized_capture": {
+    "status": "not_implemented",
+    "capture_source": "",
+    "capture_timestamp": "",
+    "region": "",
+    "client_version": "",
+    "config_mode": "",
+    "start_function_or_opcode": "",
+    "outgoing_packet_file": "",
+    "outgoing_packet_direction": "client_to_server",
+    "outgoing_packet_hex_or_binary": "",
+    "transport": "TCP_or_UDP",
+    "packet_header_hex": "",
+    "payload_length_encoding": "",
+    "region_prefix": "",
+    "protobuf_message": "",
+    "protobuf_schema_or_field_map": {},
+    "serialization_format": "",
+    "encryption_present": null,
+    "encryption_description": "",
+    "mode_id": null,
+    "match_id": null,
+    "map_id": null,
+    "ranked_flag": null,
+    "cs_special_mode_event_id": null,
+    "team_size": null,
+    "rank_min_field": null,
+    "rank_max_field": null,
+    "queue_type_field": null,
+    "match_found_response": "",
+    "match_found_response_hex_or_binary": "",
+    "lobby_response": "",
+    "game_start_response": "",
+    "required_follow_up_packets": [],
+    "validation": {
+      "start_packet_confirmed": false,
+      "server_ack_confirmed": false,
+      "match_found_confirmed": false,
+      "cs_game_start_confirmed": false
+    },
+    "notes": "Replace only with metadata from an authorized client capture. The guessed MODE_ID=102 plaintext sample is not valid. Do not enter passwords, JWTs, session keys, or IVs."
+  },
+  "implementation_checklist": [
+    "Add a separate CS config mode without changing BR route",
+    "Build the CS packet using the confirmed client payload format",
+    "Use the live session transport and encryption implementation",
+    "Parse CS server acknowledgement and match-found response",
+    "Route CS to a separate worker/play loop",
+    "Keep BR fallback unchanged",
+    "Test with one authorized account before multi-account testing"
+  ],
+  "capture_checklist": [
+    "Record mode selection and Start/Confirm action",
+    "Record the complete client-to-server start sequence",
+    "Record server acknowledgement and match-found frames",
+    "Record region and client version",
+    "Keep packet direction and packet order",
+    "Remove credentials and session secrets before sharing"
+  ]
+}

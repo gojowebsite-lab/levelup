@@ -1,0 +1,10 @@
+Requirement already satisfied: protobuf in /data/data/com.termux/files/usr/lib/python3.13/site-packages (4.25.3)
+Collecting protobuf
+  Downloading protobuf-7.36.2-py3-none-any.whl.metadata (595 bytes)
+Downloading protobuf-7.36.2-py3-none-any.whl (179 kB)
+Installing collected packages: protobuf
+  Attempting uninstall: protobuf
+    Found existing installation: protobuf 4.25.3
+    Uninstalling protobuf-4.25.3:
+      Successfully uninstalled protobuf-4.25.3
+Successfully installed protobuf-7.36.2

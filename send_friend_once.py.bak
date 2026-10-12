@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+"""Trigger a live friend request from the RUNNING AZIM-MATCH process.[cite: 2]
+
+This script does NOT log in and does NOT touch the game/UDP sockets.[cite: 2] It only
+writes friend_request_trigger.json; the already running Main.py picks it up[cite: 2]
+with its live in-memory session tokens and answers in[cite: 2]
+friend_request_result.json.[cite: 2]
+
+Usage:
+    python3 send_friend_once.py [target_uid]     (default 15563343778)[cite: 2]
+"""
+
+import asyncio
+import json
+import os
+import sys
+import time
+
+BASE = os.path.dirname(os.path.abspath(__file__))[cite: 2]
+TRIGGER = os.path.join(BASE, "friend_request_trigger.json")[cite: 2]
+RESULT = os.path.join(BASE, "friend_request_result.json")[cite: 2]
+DEFAULT_TARGET = "15563343778"[cite: 2]
+WAIT_SEC = 180.0[cite: 2]
+
+
+async def main():
+    target = str(sys.argv[1] if len(sys.argv) > 1 else DEFAULT_TARGET).strip()[cite: 2]
+    if not target.isdigit():[cite: 2]
+        print(f"[FRIEND-ONCE] target must be numeric: {target}")[cite: 2]
+        return 1[cite: 2]
+
+    # A stale result would fool the wait below - drop it first.[cite: 2]
+    try:
+        os.remove(RESULT)[cite: 2]
+    except OSError:
+        pass[cite: 2]
+
+    with open(TRIGGER, "w", encoding="utf-8") as f:[cite: 2]
+        json.dump({"target": target, "created_at": time.strftime("%Y-%m-%d %H:%M:%S")},[cite: 2]
+                  f, indent=1)[cite: 2]
+    print(f"[FRIEND-ONCE] trigger written -> target {target}")[cite: 2]
+    print("[FRIEND-ONCE] waiting for the running bot (workers are NOT disturbed) ...")[cite: 2]
+
+    deadline = time.time() + WAIT_SEC[cite: 2]
+    while time.time() < deadline:[cite: 2]
+        if os.path.exists(RESULT):[cite: 2]
+            try:
+                with open(RESULT, "r", encoding="utf-8") as f:[cite: 2]
+                    out = json.load(f)[cite: 2]
+            except Exception as e:
+                print(f"[FRIEND-ONCE] result unreadable: {e}")[cite: 2]
+                return 1[cite: 2]
+            try:
+                os.remove(RESULT)[cite: 2]
+            except OSError:
+                pass[cite: 2]
+
+            if out.get("error"):[cite: 2]
+                print(f"[FRIEND-ONCE] ERROR - {out['error']}")[cite: 2]
+                return 1[cite: 2]
+
+            print(f"\n[FRIEND-ONCE] target {out.get('target')} -> "[cite: 2]
+                  f"{out.get('ok')} OK / {out.get('failed')} FAILED "[cite: 2]
+                  f"at {out.get('finished_at')}")[cite: 2]
+            for aid, r in (out.get("results") or {}).items():[cite: 2]
+                status = "OK  " if r.get("ok") else "FAIL"[cite: 2]
+                print(f"  [{status}] {aid} - {r.get('detail')}")[cite: 2]
+            
+            failed_count = int(out.get("failed") or 0)
+            return 1 if failed_count > 0 else 0
+        await asyncio.sleep(1.0)[cite: 2]
+
+    if os.path.exists(TRIGGER):[cite: 2]
+        print("[FRIEND-ONCE] TIMEOUT - the AZIM-MATCH process never picked up "[cite: 2]
+              "the trigger (bot not running or old code).")[cite: 2]
+    else:
+        print("[FRIEND-ONCE] TIMEOUT - trigger was consumed but no result "[cite: 2]
+              "was written; check match.log for [FRIEND-TRIGGER].")[cite: 2]
+    return 1[cite: 2]
+
+
+if __name__ == "__main__":
+    raise SystemExit(asyncio.run(main()))[cite: 2]

@@ -1,0 +1,24 @@
+============================================================
+       DARK MASTER - GENERATION SUMMARY
+============================================================
+
+Session    : 2026-10-12_18-45-50
+Folder     : DARK_MASTER
+Server     : India (IND)
+Total Gen  : 5
+UID Files  : 5
+JWT Files  : 5
+Prefix     : hoddk
+Created    : 2026-10-12 18:47:01
+
+============================================================
+FILES IN THIS FOLDER:
+============================================================
+  > DARK_MASTER.json  ->  UID + Password list
+  > jwt_tokens.json    ->  JWT + Access Token list
+  > summary.txt        ->  This file
+
+============================================================
+CREATOR : DARK MASTER
+BUILD   : DARK_MASTER
+============================================================

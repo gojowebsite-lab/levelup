@@ -1,0 +1,45 @@
+{
+  "_comment": "AZIM-MATCH - verified four-player BR squad",
+  "mode": "battle_royale",
+  "level_goal": 6,
+  "group_size": 4,
+  "squad": {
+    "enabled": false,
+    "manual_human": false,
+    "form_timeout_sec": 60,
+    "invite_boss": false,
+    "boss_wait_sec": 180
+  },
+  "movement": {
+    "_comment": "independent account movement; no shared position or timing",
+    "shared": false,
+    "seed": 20261007,
+    "interval_sec": 2.5
+  },
+  "guild": {
+    "_comment": "ask for the guild id in termux once every account passed level_goal",
+    "ask_in_terminal": true
+  },
+  "friend": {
+    "_comment": "one friend request to the boss right after each login",
+    "enabled": false,
+    "boss_uid": "14216035246"
+  },
+  "safety": {
+    "_comment": "ban safe login: 1 account = 1 session, never a second MajorLogin",
+    "major_login_gap_days": 5,
+    "token_cache_ttl_days": 7,
+    "login_stagger_sec": 18,
+    "ban_check_before_login": true,
+    "reuse_session_by_open_id": false
+  },
+  "matchmaking": {
+    "_comment": "StartMatch opcode = 03 + region byte (IND -> 14). Tried in order until a match is found.",
+    "start_match_opcodes": [
+      "0315"
+    ],
+    "wait_for_match_sec": 120,
+    "skip_match_play": false
+  },
+  "dashboard": true
+}

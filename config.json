@@ -1,0 +1,40 @@
+{
+  "_comment": "AZIM-MATCH - verified four-player CS squad",
+  "mode": "cs",
+  "level_goal": 6,
+  "group_size": 4,
+  "squad": {
+    "enabled": true,
+    "manual_human": false,
+    "form_timeout_sec": 60,
+    "invite_boss": false,
+    "boss_wait_sec": 180
+  },
+  "movement": {
+    "shared": false,
+    "seed": 20261007,
+    "interval_sec": 2.5
+  },
+  "guild": {
+    "ask_in_terminal": true
+  },
+  "friend": {
+    "enabled": true,
+    "boss_uid": "14216035246"
+  },
+  "safety": {
+    "major_login_gap_days": 5,
+    "token_cache_ttl_days": 7,
+    "login_stagger_sec": 18,
+    "ban_check_before_login": true,
+    "reuse_session_by_open_id": false
+  },
+  "matchmaking": {
+    "start_match_opcodes": [
+      "0314"
+    ],
+    "wait_for_match_sec": 120,
+    "skip_match_play": false
+  },
+  "dashboard": true
+}

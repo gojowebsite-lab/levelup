@@ -1,0 +1,98 @@
+# -*- coding: utf-8 -*-
+"""
+Group (squad) formation disabled - AZIM-MATCH running in SOLO mode.
+All accounts skip squad creation, invites, and friend syncs, 
+proceeding directly to solo matchmaking.
+"""
+
+import asyncio
+import json
+import os
+import time
+
+import xC4
+
+DEFAULT_FORM_TIMEOUT = 60.0
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+class SquadState:
+    def __init__(self):
+        # Disabled to force solo gameplay for every account
+        self.enabled = False
+        self.test_mode = False
+        self.leader_uid = None
+        self.member_uids = []
+        self.leader_connected = asyncio.Event()
+        self.members_connected = set()
+        self.all_members_connected = asyncio.Event()
+        self.invites_sent = asyncio.Event()
+        self.joined = set()
+        self.failed = {}
+        self.code = None
+        self.formed = False
+        self.attempts = 0
+        self.attempted = set()
+        self.expected = 1
+        self.targets = []
+        self.started_at = time.time()
+
+        self.evidence = set()
+        self.seen_by = {}
+        self.group_counts = {}
+        self.stage_gate = asyncio.Event()
+        self.stage_expect = 1
+        self.done_count = 0
+        self.decision = None
+        self.verified = True
+        self.friend_blocked = False
+        self.boss_uid = None
+        self.boss_invited = False
+        self.boss_verified = True
+        self.boss_gate = asyncio.Event()
+
+    def reset_for_round(self):
+        self.formed = False
+        self.attempts = 0
+        self.started_at = time.time()
+        self.evidence = set()
+        self.seen_by = {}
+        self.group_counts = {}
+        self.stage_gate = asyncio.Event()
+        self.stage_expect = 1
+        self.done_count = 0
+        self.decision = None
+        self.verified = True
+        self.friend_blocked = False
+        self.boss_invited = False
+        self.boss_verified = True
+        self.boss_gate = asyncio.Event()
+
+
+SQUAD = SquadState()
+
+
+def members_needed():
+    return 0
+
+
+def team_verified():
+    return True
+
+
+async def team_verdict(wait=60.0):
+    return True
+
+
+def team_size():
+    return 1
+
+
+async def squad_stage(reader, writer, account_id, region, key, iv, client_version, timeout=DEFAULT_FORM_TIMEOUT):
+    """Squad stage bypassed completely for solo play."""
+    return
+
+
+def status_line():
+    return "solo mode active - squad formation disabled"
+    

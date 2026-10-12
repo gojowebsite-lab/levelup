@@ -1,0 +1,42 @@
+[
+  {
+    "uid": "8136011441",
+    "password": "E540C51D2581606BF8503BF283A0B9CFB62CFAB6BD0BFDE05494E4A6846F3AB9",
+    "name": "hoddk0405521",
+    "account_id": "18596497254",
+    "region": "IND",
+    "created_at": "2026-10-12 18:47:00"
+  },
+  {
+    "uid": "8136012200",
+    "password": "507A87009A775261437CE4D50F397EF00923C10740ED7B94BDDC2DA72C31CE65",
+    "name": "hoddk8903607",
+    "account_id": "18596497342",
+    "region": "IND",
+    "created_at": "2026-10-12 18:47:00"
+  },
+  {
+    "uid": "8136013103",
+    "password": "88839FB819806E4A1432825FFF93BA6F587009629F94CB512C99773455780035",
+    "name": "hoddk5091412",
+    "account_id": "18596497807",
+    "region": "IND",
+    "created_at": "2026-10-12 18:47:01"
+  },
+  {
+    "uid": "8136013702",
+    "password": "FAD3B7F1037E1C76AA9604B581E871C6F015368806300C6011461A64D7AA8D17",
+    "name": "hoddk2256943",
+    "account_id": "18596498002",
+    "region": "IND",
+    "created_at": "2026-10-12 18:47:01"
+  },
+  {
+    "uid": "8136014372",
+    "password": "D9D782FCCF6D93C9F9C58AE671B5C62D4489CEAD862C1B0759E8D3765CFBB8CC",
+    "name": "hoddk7933703",
+    "account_id": "18596498080",
+    "region": "IND",
+    "created_at": "2026-10-12 18:47:01"
+  }
+]

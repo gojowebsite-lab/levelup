@@ -1,0 +1,74 @@
+[
+  {
+    "uid": "8063332591",
+    "password": "93E8135EEEC6B6391F6A28F518A8FC40500EF643176487C01AFAACCF0E62B2B8",
+    "name": "fhfn16713679",
+    "account_id": "18523724300",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:01"
+  },
+  {
+    "uid": "8063332687",
+    "password": "46792AC50A365E9E0C15CCD3EBF730F37B1AB342B5DC7AEE26D112DC860BABEC",
+    "name": "fhfn52010329",
+    "account_id": "18523724365",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:01"
+  },
+  {
+    "uid": "8063332800",
+    "password": "37D9B7F18D6CD1136301456EE42AEBA1DA20058EDC83DEF2B7D91B6C3681367A",
+    "name": "fhfn69725014",
+    "account_id": "18523724436",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:01"
+  },
+  {
+    "uid": "8063333000",
+    "password": "857F9A53D68962D87EA959B7D96D9331C5558CB3DF145F90499C9539BB4BECDB",
+    "name": "fhfn10000276",
+    "account_id": "18523724587",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:02"
+  },
+  {
+    "uid": "8063333083",
+    "password": "0394CC802F4AAD3B6CB0D677242414B723D275D254C44509B28C29EBF09DA930",
+    "name": "fhfn74130349",
+    "account_id": "18523724682",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:02"
+  },
+  {
+    "uid": "8063333165",
+    "password": "B75FFCE0F3BF4B91633F1AC98453AB706B7DBE783F3505B228487E6CF115918A",
+    "name": "fhfn98600931",
+    "account_id": "18523724800",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:02"
+  },
+  {
+    "uid": "8063333235",
+    "password": "80E92FF75C1D8BF80B81B111788CB5A2C3778E1BEB9276A04F262922AB6BD81D",
+    "name": "fhfn73141761",
+    "account_id": "18523724873",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:03"
+  },
+  {
+    "uid": "8063333303",
+    "password": "2E6898A065C8925E42E83219B1BB3B2FF7234424306297ACC8B9FC44F03954CD",
+    "name": "fhfn16774844",
+    "account_id": "18523724980",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:03"
+  },
+  {
+    "uid": "8063333357",
+    "password": "87A0B85BB1E606E8827AADDBFDD2F93EA62E2A7A1747179C4E1ACFDE55D7DE3B",
+    "name": "fhfn46581820",
+    "account_id": "18523725007",
+    "region": "IND",
+    "created_at": "2026-10-10 16:39:03"
+  }
+]
