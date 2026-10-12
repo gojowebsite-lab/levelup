@@ -1,0 +1,4 @@
+google-play-scraper
+pycryptodome
+protobuf-decoder
+httpx
